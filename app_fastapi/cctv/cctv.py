@@ -17,10 +17,10 @@ changwon = {
         "apiKey":API_KEY,
         "type":"its", # 도로유형 ( 고속도로 / its(국도) )
         "cctvType":"1",
-        "minX":"128.72872896054545", # 최소 경도
-        "maxX":"128.75991762189523", #최대 경도
-        "minY": "35.18182667326473", #최소 위도
-        "maxY": "35.18944966046303", #최대 위도
+        "minX":"128.780000", # 최소 경도
+        "maxX":"128.850000", #최대 경도
+        "minY": "35.150000", #최소 위도
+        "maxY": "35.210000", #최대 위도
         "getType": "json"
         }
 
@@ -54,11 +54,10 @@ def clients_cctv(cctv_id):
     response = httpx.get(
         API_URL,
         params=selected_params,
-        timeout=5.0
     )
 
     # http 오류 확인
-    response.raise_for_status()
+    #response.raise_for_status()
 
     # HTTP 응답 변환
     data = response.json()
