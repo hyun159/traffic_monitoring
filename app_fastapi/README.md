@@ -36,5 +36,5 @@ Repository
 PostgreSQL / Cache
 
 Scheduler
-   ↓
+↓
 Service

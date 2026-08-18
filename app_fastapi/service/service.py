@@ -1,8 +1,5 @@
 
-from fastapi import FastAPI
-import cctv
+from cctv import cctv
 
-
-# CCTV 요청 처리
 def service_cctv(cctv_id: int):
-    return cctv.cctv(cctv_id)
+    return cctv.clients_cctv(cctv_id)
