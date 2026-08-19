@@ -15,33 +15,43 @@ load_dotenv()
 API_URL = "https://openapi.its.go.kr:9443/cctvInfo"
 API_KEY = os.getenv("API_KEY") #.env 인증키 호출
 
-# 창원 요청변수
-창원 = {
+
+장유IC = {
         "apiKey":API_KEY,
-        "type":"its", # 도로유형 ( 고속도로 / its(국도) )
+        "type":"ex", # 도로유형 ( 고속도로 / its(국도) )
         "cctvType":"1",
-        "minX":"128.780000", # 최소 경도
-        "maxX":"128.850000", #최대 경도
-        "minY": "35.150000", #최소 위도
-        "maxY": "35.210000", #최대 위도
-        "getType": "json"
+        "minX":"128.80815571121036", # 최소 경도
+        "maxX":"128.80870127206373", #최대 경도
+        "minY":"35.19691939528175", #최소 위도
+        "maxY":"35.19731956808292", #최대 위도
+        "getType":"json"
         }
 
 
 
+#(남해2지선[장유])
 김해응달교 = {
         "apiKey":API_KEY,
         "type":"its", # 도로유형 ( 고속도로 / its(국도) )
         "cctvType":"1",
-        "minX":"128.83019242491838", # 최소 경도
-        "maxX":"128.83098043278983", #최대 경도
-        "minY": "35.17649062377582", #최소 위도
-        "maxY": "35.17785754845648", #최대 위도
-        "getType": "json"
+        "minX":"128.83039287446073", # 최소 경도
+        "maxX":"128.83122063648221", #최대 경도
+        "minY":"35.176863845419014", #최소 위도
+        "maxY":"35.178045421219906", #최대 위도
+        "getType":"json"
         }
 
-# 김해 요청변수
-gimhae = {
+
+# 사상 나들목 ,종점
+사상나들목 = {
+        "apiKey":API_KEY,
+        "type":"ex", # 도로유형 ( ex(고속도로) / its(국도) )
+        "cctvType":"1",
+        "minX":"128.96268666935387", # 최소 경도
+        "maxX":"128.97401248679498", #최대 경도
+        "minY":"35.15209623524839", #최소 위도
+        "maxY":"35.15383032786352", #최대 위도
+        "getType":"json"
 
 }
 
@@ -57,10 +67,10 @@ def clients_cctv(cctv_id):
 
     # 로컬변수와 API 요청변수 스위치 박스 생성
     cctv_params = {
-        1: 창원,
-        2: gimhae,
-        3: busan,
-        4: 김해응달교
+        1: 장유IC,
+        2: 김해응달교,
+        3: 사상나들목,
+        4: ""
     }
 
    
@@ -88,3 +98,17 @@ def clients_cctv(cctv_id):
 
 if __name__ == "__main__":
     print(clients_cctv(4))
+
+API_URL = "http://www.utic.go.kr/guide/tsdmsOpenData.do"
+
+params = {
+    "key": "otI8zeD2J6SuHmddUPKmVn6ZpqSKbVs9waJXBGILC9A"
+}
+
+response = httpx.get(
+    API_URL,
+    params=params
+)
+
+print(response.status_code)
+print(response.text)
