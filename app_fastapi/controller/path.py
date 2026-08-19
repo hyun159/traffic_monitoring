@@ -13,6 +13,9 @@ from fastapi import APIRouter
 # service 파일 호출
 from service import service
 
+# scheduler 파일 호출
+from scheduler import scheduler
+
 #객체 생성
 router = APIRouter(
     prefix="/cctv", # CCTV URL
@@ -20,10 +23,16 @@ router = APIRouter(
     responses={404: {"description": "Not Found"}}
 )
 
+
+# CCTV 버튼 기능
 # 정적웹으로 부터 cctv 번호 요청 받는다.
 # service로 cctv_id(cctv 번호) 전달
 # service에게 받은 공공 api cctv url 반환
-
 @router.get("/{cctv_id}") # 요청 받는 번호
 def get_cctv(cctv_id: int): # 매개변수 번호와 service 함수 호출
     return service.service_cctv(cctv_id)
+
+# 5분 주기 교통 정보 갱신 기능
+@router.get("/traffic")
+def get_5min_info():
+    return service.get_traffic()

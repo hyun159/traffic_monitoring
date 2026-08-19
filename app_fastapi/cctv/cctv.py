@@ -55,10 +55,6 @@ API_KEY = os.getenv("API_KEY") #.env 인증키 호출
 
 }
 
-# 부산 요청변수
-busan = {
-
-}
 
 
 
@@ -69,12 +65,12 @@ def clients_cctv(cctv_id):
     cctv_params = {
         1: 장유IC,
         2: 김해응달교,
-        3: 사상나들목,
-        4: ""
+        3: 사상나들목
     }
 
    
     # 로컬변수와 API 요청변수 매핑
+    # 장유IC = cctv_params[1]
     selected_params = cctv_params[cctv_id]
         # ITS API 요청
     response = httpx.get(
@@ -95,20 +91,3 @@ def clients_cctv(cctv_id):
 
 }
     return cctv_data
-
-if __name__ == "__main__":
-    print(clients_cctv(4))
-
-API_URL = "http://www.utic.go.kr/guide/tsdmsOpenData.do"
-
-params = {
-    "key": "otI8zeD2J6SuHmddUPKmVn6ZpqSKbVs9waJXBGILC9A"
-}
-
-response = httpx.get(
-    API_URL,
-    params=params
-)
-
-print(response.status_code)
-print(response.text)
