@@ -33,6 +33,12 @@ def get_cctv(cctv_id: int): # 매개변수 번호와 service 함수 호출
     return service.service_cctv(cctv_id)
 
 # 5분 주기 교통 정보 갱신 기능
+# (백그라운드)
+# shceduler가 5분마다 service로 데이터 전달
+# service의 전역함수에 데이터 5분 주기 갱신
+# (사용자 요청 시)
+# 자바스크립트 5분 주기 요청 -> controller
+# service -> controller -> 자바스크립트 
 @router.get("/traffic")
 def get_5min_info():
     return service.get_traffic()
