@@ -8,6 +8,11 @@ import os
 import httpx
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
+<<<<<<< HEAD
+=======
+from pprint import pprint
+
+>>>>>>> 111e60f (feat: scheduler request_api 함수 줄 바꿈 추가, pprint 추가)
 
 # 5분 마다 실행하는 라이브러리임
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -50,27 +55,27 @@ target_linkId = {
     
         "1411062000": {
             "도로": "낙동대교",
-            "방향": "부산",
-            "위치": "낙동대교 시작"
+            "방향": "부산 -> 김해",
+            "위치": "낙동대교 기점"
         },
 
        
         "1440068100":{
             "도로": "낙동대교",
-            "방향": "부산",
+            "방향": "부산 -> 김해",
             "위치": "낙동대교 종점"
         },
 
 
         "1440068000": {
             "도로": "낙동대교",
-            "방향": "김해",
-            "위치": "낙동대교 시작"
+            "방향": "김해 -> 부산",
+            "위치": "낙동대교 기점"
         },
 
         "1411061900": {
             "도로": "낙동대교",
-            "방향": "김해",
+            "방향": "김해 -> 부산",
             "위치": "낙동대교 종점"
         }
     }
@@ -115,10 +120,15 @@ def request_api():
                 "apiKey": API_KEY,
                 "sectionId": item,
                 "fCastDate": 20260820, #fCastDate
+<<<<<<< HEAD
                 "fCastHour": 19, # fCastHour
+=======
+                "fCastHour": 18, #fCastHour
+>>>>>>> 111e60f (feat: scheduler request_api 함수 줄 바꿈 추가, pprint 추가)
                 "getType": "json"
                 }
             )
+        
        
 
     # HTTP 오류 확인
@@ -153,14 +163,12 @@ def request_api():
 
                }
                userData.append(parsed_data)
-
-
-
-
+               
+            
 
     return userData
 
-print(request_api())
+pprint(request_api())
 
 '''
 # result 값을 5분 마다 service로 전달하는 함수
