@@ -8,7 +8,6 @@ import os
 import httpx
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
-from service import service
 
 # 5분 마다 실행하는 라이브러리임
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -115,8 +114,8 @@ def request_api():
                 params = {
                 "apiKey": API_KEY,
                 "sectionId": item,
-                "fCastDate": fCastDate,
-                "fCastHour": fCastHour,
+                "fCastDate": 20260820, #fCastDate
+                "fCastHour": 19, # fCastHour
                 "getType": "json"
                 }
             )
@@ -164,8 +163,7 @@ def request_api():
 print(request_api())
 
 '''
-# result 값을 service로 전달하는 함수
-# 5분마다 실행해야하므로 
+# result 값을 5분 마다 service로 전달하는 함수
 def update_traffic():
     data = request_api()
     service.save_traffic(data)

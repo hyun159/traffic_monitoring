@@ -13,12 +13,15 @@ def service_cctv(cctv_id: int):
 
 traffic_cache = None
 
-# scheduler 함수에서 data값을 받음.
-# global : 전역변수에 값을 넣을 수 있음.
+# 백엔드(scheduler -> service) -> 캐시 (5분 주기)
+# scheduler save_traffic에서 5분마다 API를 받음.
+# global : 전역변수 호출 기능
 def save_traffic(data):
     global traffic_cache
     traffic_cache = data
 
-# controller로 값을 보냄
+# 외부요청(5분 주기) <-> controller <-> service <-> 캐시 
+# 자바스크립트가 5분 주기로 controller의 /traffic으로 데이터를 보낸다.
+# service의 get_traffic은 캐시의 최신 값을 리턴한다. 
 def get_traffic():
     return traffic_cache
