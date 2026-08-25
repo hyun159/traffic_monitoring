@@ -8,11 +8,9 @@ import os
 import httpx
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
-<<<<<<< HEAD
-=======
+from service import service
 from pprint import pprint
 
->>>>>>> 111e60f (feat: scheduler request_api 함수 줄 바꿈 추가, pprint 추가)
 
 # 5분 마다 실행하는 라이브러리임
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -119,12 +117,8 @@ def request_api():
                 params = {
                 "apiKey": API_KEY,
                 "sectionId": item,
-                "fCastDate": 20260820, #fCastDate
-<<<<<<< HEAD
-                "fCastHour": 19, # fCastHour
-=======
-                "fCastHour": 18, #fCastHour
->>>>>>> 111e60f (feat: scheduler request_api 함수 줄 바꿈 추가, pprint 추가)
+                "fCastDate": fCastDate, #fCastDate
+                "fCastHour": fCastHour, # fCastHour
                 "getType": "json"
                 }
             )
@@ -170,21 +164,23 @@ def request_api():
 
 pprint(request_api())
 
-'''
+
 # result 값을 5분 마다 service로 전달하는 함수
 def update_traffic():
+    print("스케줄러 실행됨")
     data = request_api()
     service.save_traffic(data)
 
+# 서버 구동 직후 즉시 실행
+update_traffic()
 
 # 5분 주기 스케쥴링
 scheduler = BackgroundScheduler()
 
 scheduler.add_job(
-    request_api,
+    update_traffic,
     "interval",
     minutes=5
 )
 
 scheduler.start()
-'''

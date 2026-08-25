@@ -8,8 +8,8 @@ def service_cctv(cctv_id: int):
     return cctv.clients_cctv(cctv_id)
 
 
-# 5분 API 갱신 함수 scheduler
-# 
+# 5분 API 갱신 함수
+
 
 traffic_cache = None
 
@@ -25,3 +25,4 @@ def save_traffic(data):
 # service의 get_traffic은 캐시의 최신 값을 리턴한다. 
 def get_traffic():
     return traffic_cache
+
