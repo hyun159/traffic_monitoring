@@ -1,7 +1,7 @@
 # 2026_08_27
 
 ## git / docker 설치
-## sudo 비밀번호 생략 (sudoers 등록)
+## sudo생략, 비밀번호 생략
 ```
 dnf install git -y
 
@@ -20,8 +20,25 @@ https://docs.docker.com/engine/install/centos
 
 
 
-
+# docker 명령어 sudo 비밀번호 생략
 sudo visudo
 nginx_01 ALL=(ALL) NOPASSWD: ALL
+
+# docker 명령어 sudo 생략
+sudo usermod -aG nginx_01 docker
+
+```
+
+
+## git에서 소스코드 가져오기
+```
+cd /opt
+git clone URL
+```
+
+## nginx conf 파일 설정하기
+```
+mkdir -p /etc/nginx
+vi /etc/nginx/nginx.conf
 
 ```
