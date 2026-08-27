@@ -37,8 +37,19 @@ git clone URL
 ```
 
 ## nginx conf 파일 설정하기
+## 바인드 볼륨으로 연결하기
+## 버전관리 시 traffic.disable
 ```
-mkdir -p /etc/nginx
-vi /etc/nginx/nginx.conf
+mkdir -p /etc/nginx/conf.d
+vi /etc/nginx/conf.d/traffic.conf
+```
 
+
+## nginx.conf 파일 기본구조
+```
+```
+
+## 포트 흐름
+```
+![엔진엑스 포트 흐름](images/nginx_port_flow.png)
 ```
