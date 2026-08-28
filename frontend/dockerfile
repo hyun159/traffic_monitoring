@@ -1,6 +1,7 @@
 FROM nginx:alpine
 # nginx 기본 웹 경로 -> /usr/share/nginx/html
-COPY . /usr/share/nginx/html
+COPY index.html /usr/share/nginx/html/index.html
+COPY app.js /usr/share/nginx/html/app.js
 EXPOSE 80
 # nginx.conf -> 컨테이너 내부 nginx.conf 복사
 COPY traffic.conf /etc/nginx/conf.d/traffic.conf
