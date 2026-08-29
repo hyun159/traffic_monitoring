@@ -77,4 +77,4 @@ server {
 ```
 
 
-![컨테이너 포트 흐름](infra/images/nginx_port_flow.png)
+![컨테이너 포트 흐름](../infra/images/nginx_port_flow.png)

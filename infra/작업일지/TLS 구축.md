@@ -28,4 +28,4 @@ sudo certbot certonly --standalone -d yulhatraffic.kro.kr
 ```
 
 
-![TLS 연결과정](infra/images/TLS.png)
+![TLS 연결과정](../infra/images/TLS.png)
