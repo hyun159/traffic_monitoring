@@ -26,3 +26,6 @@ sudo certbot certonly --standalone -d yulhatraffic.kro.kr
 /etc/letsencrypt/live/yulhatraffic.kro.kr/fullchain.pem
 /etc/letsencrypt/live/yulhatraffic.kro.kr/privkey.pem
 ```
+
+
+![TLS 연결과정](infra\images\TLS.png)
