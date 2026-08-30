@@ -69,7 +69,6 @@ events
                 #전달할 서버
                 proxy_pass
 
-<<<<<<< HEAD
     # 메인페이지
     location / {
         # 로컬에서 파일찾기
@@ -83,11 +82,9 @@ events
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
-}
+
 ```
 
 
 ![컨테이너 포트 흐름](../images/nginx_port_flow.png)
-=======
 ```
->>>>>>> 6557676 (docs: app구축.md 생성 appVM docker, git 설치, sudo 등록  완료, .env 파일 설정 필요)

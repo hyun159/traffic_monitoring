@@ -5,7 +5,7 @@
 ## sudo생략, 비밀번호 생략
 ```
 sudo visudo
-username ALL=(ALL) NOPASSWD: ALL
+app01 ALL=(ALL) NOPASSWD: ALL
 
 dnf install git -y
 
@@ -21,7 +21,7 @@ https://docs.docker.com/engine/install/centos
 # 도커 패키지 설치
  sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-
+# docker 명령어 사용 시 sudo 생략
 usermod -aG docker app01
 ```
 
