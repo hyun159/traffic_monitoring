@@ -4,7 +4,7 @@
 function openCctv(cctvId) {
     console.log("openCctv 호출:", cctvId);
 
-    fetch(`http://127.0.0.1:8000/cctv/${cctvId}`)
+    fetch(`/cctv/${cctvId}`)
         .then(response => response.json())
         .then(data => {
             console.log("API 응답:", data);
@@ -48,7 +48,7 @@ button3.addEventListener("click", function() {
 // traffic으로 5분 주기 api 갱신
 function loadTraffic() {
 
-    fetch("http://127.0.0.1:8000/traffic")
+    fetch("/traffic")
         .then(response => response.json())
 
         .then(data => {

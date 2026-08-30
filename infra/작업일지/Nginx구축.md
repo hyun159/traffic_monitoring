@@ -37,29 +37,39 @@ git clone URL
 ```
 
 ## nginx conf 파일 설정하기
-## 바인드 볼륨으로 연결하기
 ## 버전관리 시 traffic.disable
 ```
 mkdir -p /etc/nginx/conf.d
 vi /etc/nginx/conf.d/traffic.conf
 ```
 
-
-## nginx.conf 파일 기본구조
+## nginx 기본구조
 ```
 
+# 워커 설정
+main
+events
 
-# 요청받을 http 요청은 server {} 으로 처리하기
-server {
+    # 공통 http 설정
+    http
 
-    # 포트(리스닝 소켓 개방)
-    listen 80;
+        # 도메인:포트
+        server1
+            # url path
+            location
+                # 전달할 서버
+                proxy_pass
+
+        
     
-    # 도메인(host)
-    server_name example.com;
-    
-    # url 경로(기능분기점)
+        # 도메인:포트
+        server2
+            # url path
+            location
+                #전달할 서버
+                proxy_pass
 
+<<<<<<< HEAD
     # 메인페이지
     location / {
         # 로컬에서 파일찾기
@@ -78,3 +88,6 @@ server {
 
 
 ![컨테이너 포트 흐름](../images/nginx_port_flow.png)
+=======
+```
+>>>>>>> 6557676 (docs: app구축.md 생성 appVM docker, git 설치, sudo 등록  완료, .env 파일 설정 필요)

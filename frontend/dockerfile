@@ -4,4 +4,4 @@ COPY index.html /usr/share/nginx/html/index.html
 COPY app.js /usr/share/nginx/html/app.js
 EXPOSE 80
 # nginx.conf -> 컨테이너 내부 nginx.conf 복사
-COPY traffic.conf /etc/nginx/conf.d/traffic.conf
+COPY traffic.conf /etc/nginx/nginx.conf
