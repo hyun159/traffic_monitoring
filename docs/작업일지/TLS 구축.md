@@ -28,10 +28,8 @@ sudo certbot certonly --standalone -d yulhatraffic.kro.kr
 /etc/letsencrypt/live/yulhatraffic.kro.kr/privkey.pem
 ```
 
-<<<<<<< HEAD
 
 ![TLS 연결과정](../images/TLS.png)
-=======
 ## 도커 인증서 바인드 마운트로 띄우기
 ```
 docker build -t nginx .
@@ -41,4 +39,3 @@ docker run -d --name nginx -p 80:80 -p 443:443 --mount type=bind,source=/etc/let
 
 ```
 ![alt text](\images\nginx_docker.png)
->>>>>>> 6557676 (docs: app구축.md 생성 appVM docker, git 설치, sudo 등록  완료, .env 파일 설정 필요)

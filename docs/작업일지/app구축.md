@@ -25,4 +25,5 @@ https://docs.docker.com/engine/install/centos
 usermod -aG docker app01
 ```
 
-##
+## 소스코드 가져오기
+# 빌드 후 컨테이너 생성
