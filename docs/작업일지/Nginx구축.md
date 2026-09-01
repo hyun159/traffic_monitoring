@@ -72,10 +72,11 @@ events
     # 메인페이지
     location / {
         # 로컬에서 파일찾기
-        root
+        root /html 디렉토리
+        index /html파일
 
         # 전달받을 서버
-        proxy_pass http://10.0.2.20:8000;
+        proxy_pass http://192.168.0.4:80;
 
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
