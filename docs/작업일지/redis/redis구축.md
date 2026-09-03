@@ -59,6 +59,7 @@ TLB 자원이 줄어들고 주소변환 작업속도 향상
 ```
 
 ```bash
+#GRUB 설정
 sudo nano /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash transparent_hugepage=never"
 sudo grub2-mkconfig -o /boot/grub2/grub.cfg
@@ -74,7 +75,7 @@ sudo reboot
 ## maxmemory
 ### : OOM Killer 방지
 ```
-oo
+
 ```
 
 ```bash
@@ -118,6 +119,89 @@ vmstat 1  # si / so 값이 발생하면 swap 사용, 메모리 압박 가능성 
 cat /proc/sys/vm/swappiness
 
 
-
-swap
 ```
+
+
+
+# THP systemd 설정방법
+```
+
+리눅스2.6커널 이후  복잡한 계층 구조나 객체, 드라이버, 하드웨어 제어는 sysfs로 관리
+
+
+sudo nano /etc/systemd/system/disable-thp.service
+
+[Unit]
+Description=Disable Transparent Huge Pages (THP) for Redis
+After=sysinit.target local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo never > /sys/kernel/mm/transparent_hugepage/enabled && echo never > /sys/kernel/mm/transparent_hugepage/defrag'
+
+[Install]
+WantedBy=basic.target
+
+# systemd 재로드
+sudo systemctl daemon-reload
+
+# 부팅 시 자동 실행 설정 및 즉시 시작
+sudo systemctl enable --now disable-thp.service
+
+
+cat /sys/kernel/mm/transparent_hugepage/enabled
+cat /sys/kernel/mm/transparent_hugepage/defrag
+
+```
+
+
+
+
+<hr/>
+<hr/>
+<hr/>
+
+
+# Redis 운영
+[1번](#redis-데이터-영속성-관리)
+```
+RDB에 스냅샷파일, AOF에 명령어 로그 파일을 기록한다.
+
+레디스 기본 설정상 RDB와 AOF의 저장 경로는 /data로 지정되어있음.
+- dump.rdb
+- appendonlydir/appendonly.aof
+```
+
+## 1.Redis 데이터 영속성 관리
+
+바인드 마운트(사람), 네임드 마운트(컨테이너)의 차이는 관리 주체다.
+
+1. conf 파일 생성
+2. acl 파일 생성
+
+/opt/redis/
+├─ redis.conf
+├─ users.acl
+└─ docker-compose.yml
+
+
+호스트에서 백업은 자체 관리
+sudo mkdir -p /backup/redis
+sudo chmod 750 /backup/redis
+
+
+NFS 생성해서 붙이기
+
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: redis
+    command: redis-server --requirepass "your_password" --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro # conf파일 바인드
+      - ./users.acl:/usr/local/etc/redis/users.acl:ro # acl 파일 바인드
+    restart: always
