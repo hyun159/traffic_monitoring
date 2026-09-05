@@ -1,5 +1,9 @@
 
 from cctv import cctv
+import os
+import json
+import redis
+from dotenv import load_dotenv
 
 
 
@@ -8,6 +12,54 @@ def service_cctv(cctv_id: int):
     return cctv.clients_cctv(cctv_id)
 
 
+
+
+
+# redis 캐싱
+
+load_dotenv()
+
+# redis 연결 객체 생성
+redis_client = redis.Redis(
+    host=os.getenv("REDIS_HOST"),
+    port=int(os.getenv("REDIS_PORT", 6379)),
+    username=os.getenv("REDIS_USER"),
+    password=os.getenv("REDIS_PASSWORD"),
+    decode_responses=True 
+)
+
+
+
+# redis에서 사용할 key(traffic)
+TRAFFIC_CACHE_KEY = "traffic:data"
+
+
+# 백엔드 scheduler -> service -> redis
+# 5분 마다 레디스로 교통정보 갱신
+def save_traffic(data):
+    #set 명령어 실행
+    redis_client.set(
+        TRAFFIC_CACHE_KEY,
+        json.dumps(data, ensure_ascii=False)
+    )
+
+
+# 자바스크립트 -> controller -> service -> redis
+# redis에 저장된 최신 교통정보 조회
+def get_traffic():
+
+    #get 명령어 실행
+    data = redis_client.get(TRAFFIC_CACHE_KEY)
+
+    if data is None:
+        return None
+
+    return json.loads(data)
+
+
+
+'''
+# 전역 변수 캐싱
 # 5분 API 갱신 함수
 
 
@@ -26,3 +78,4 @@ def save_traffic(data):
 def get_traffic():
     return traffic_cache
 
+'''
