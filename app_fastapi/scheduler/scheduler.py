@@ -162,17 +162,19 @@ def request_api():
 
     return userData
 
-pprint(request_api())
+#pprint(request_api())
 
 
 # result 값을 5분 마다 service로 전달하는 함수
 def update_traffic():
     print("스케줄러 실행됨")
-    data = request_api()
-    service.save_traffic(data)
+    try:
+        data = request_api()
+        service.save_traffic(data)
 
-# 서버 구동 직후 즉시 실행
-update_traffic()
+    except httpx.HTTPStatusError as e:
+        print(f"ITS API 요청 실패: {e.response.status_code}")
+
 
 # 5분 주기 스케쥴링
 scheduler = BackgroundScheduler()

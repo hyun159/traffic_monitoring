@@ -57,8 +57,8 @@ def get_traffic():
     return json.loads(data)
 
 
-
 '''
+
 # 전역 변수 캐싱
 # 5분 API 갱신 함수
 
