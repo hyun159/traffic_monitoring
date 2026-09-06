@@ -1,0 +1,11 @@
+# 기본 계정 차단
+user default off
+
+# 운영자 계정
+# ~* : 모든 키 접근가능
+# &* : 모든 /pub/sub 접근가능
+# +@all : 모든 명령어 사용 가능
+user admin on >1234 ~* &* +@all
+
+# 애플리케이션 계정
+user app on >1234 ~traffic:* +get +set
